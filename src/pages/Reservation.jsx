@@ -1,24 +1,27 @@
-import { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Typography, Box, CircularProgress } from '@mui/material';
 import ReservationForm from '../components/ReservationForm';
-import { db } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
-function Reservation({ db }) {
+function Reservation() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    console.log('Reservation component mounted');
-  }, []);
-
   const handleReservation = async (data) => {
-    console.log('handleReservation called with data:', data);
     setLoading(true);
     setError('');
     try {
+      // Move the console.log here
+      console.log('Data being sent to Firestore:', {
+        ...data,
+        guests: parseInt(data.guests),
+        date: new Date(data.date),
+        createdAt: new Date()
+      });
+
       const docRef = await addDoc(collection(db, 'reservations'), {
         ...data,
         guests: parseInt(data.guests),
@@ -33,7 +36,7 @@ function Reservation({ db }) {
         } 
       });
     } catch (error) {
-      console.error("Error saving reservation: ", error);
+      console.error("Full error object:", error); // Log the full error object
       setError('Terjadi kesalahan saat menyimpan reservasi. Silakan coba lagi.');
     } finally {
       setLoading(false);
@@ -41,17 +44,8 @@ function Reservation({ db }) {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100%',
-        padding: 3,
-      }}
-    >
-      <Container maxWidth="sm">
+    <Container maxWidth="sm">
+      <Box sx={{ mt: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
           Reservasi Pernikahan
         </Typography>
@@ -61,8 +55,8 @@ function Reservation({ db }) {
         ) : (
           <ReservationForm onSubmit={handleReservation} />
         )}
-      </Container>
-    </Box>
+      </Box>
+    </Container>
   );
 }
 
