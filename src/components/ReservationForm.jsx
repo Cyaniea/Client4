@@ -1,47 +1,106 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { TextField, Button, Box } from '@mui/material';
 
 function ReservationForm({ onSubmit }) {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [guests, setGuests] = useState(1);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    guests: '',
+    date: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ name, email, guests });
+    onSubmit(formData);
+  };
+
+  const formatDate = (date) => {
+    if (!date) return '';
+    const [year, month, day] = date.split('-');
+    const dateObj = new Date(year, month - 1, day);
+    return dateObj.toLocaleDateString('id-ID', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
       <TextField
         fullWidth
         label="Nama"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
         margin="normal"
         required
       />
       <TextField
         fullWidth
         label="Email"
+        name="email"
         type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        value={formData.email}
+        onChange={handleChange}
         margin="normal"
         required
       />
       <TextField
         fullWidth
         label="Jumlah Tamu"
+        name="guests"
         type="number"
-        value={guests}
-        onChange={(e) => setGuests(parseInt(e.target.value))}
+        value={formData.guests}
+        onChange={handleChange}
         margin="normal"
         required
-        InputProps={{ inputProps: { min: 1 } }}
+        inputProps={{ min: 1 }}
       />
-      <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-        Reservasi
+      <TextField
+        fullWidth
+        label="Tanggal Reservasi"
+        name="date"
+        type="date"
+        value={formData.date}
+        onChange={handleChange}
+        margin="normal"
+        required
+        InputLabelProps={{
+          shrink: true,
+        }}
+        inputProps={{
+          min: new Date().toISOString().split('T')[0]
+        }}
+      />
+      {formData.date && (
+        <TextField
+          fullWidth
+          label="Tanggal Terpilih"
+          value={formatDate(formData.date)}
+          margin="normal"
+          InputProps={{
+            readOnly: true,
+          }}
+        />
+      )}
+      <Button 
+        type="submit" 
+        fullWidth 
+        variant="contained" 
+        color="primary" 
+        sx={{ mt: 3, mb: 2 }}
+      >
+        Buat Reservasi
       </Button>
     </Box>
   );

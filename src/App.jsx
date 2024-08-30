@@ -9,7 +9,9 @@ import Home from './pages/Home';
 import Reservation from './pages/Reservation';
 import Confirmation from './pages/Confirmation';
 import Contacts from './pages/Contacts';
+import PackageDetail from './pages/PackageDetail';
 import theme from './theme';
+import { db } from './firebase'; // Import db from firebase.js
 
 function App() {
   return (
@@ -21,10 +23,10 @@ function App() {
           <Box component="main" sx={{ flexGrow: 1 }}>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/reservation" element={<Reservation />} />
+              <Route path="/reservation" element={<Reservation db={db} />} />
               <Route path="/confirmation" element={<Confirmation />} />
               <Route path="/contacts" element={<Contacts />} />
-              {/* <Route path="/package/:id" element={<PackageDetail />} /> */}
+              <Route path="/package/:id" element={<PackageDetail />} />
             </Routes>
           </Box>
           <Footer />
