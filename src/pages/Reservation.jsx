@@ -4,30 +4,30 @@ import { Container, Typography, Box, CircularProgress } from '@mui/material';
 import ReservationForm from '../components/ReservationForm';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import { useAuth } from '../context/AuthContext'; // Import useAuth
 
 function Reservation() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const { user } = useAuth(); // Get the current user
 
   const handleReservation = async (data) => {
     setLoading(true);
     setError('');
     try {
-      // Move the console.log here
-      console.log('Data being sent to Firestore:', {
+      const reservationData = {
         ...data,
+        userId: user.uid, // Add the user's ID to the reservation
+        userEmail: user.email, // Add the user's email to the reservation
         guests: parseInt(data.guests),
         date: new Date(data.date),
         createdAt: new Date()
-      });
+      };
 
-      const docRef = await addDoc(collection(db, 'reservations'), {
-        ...data,
-        guests: parseInt(data.guests),
-        date: new Date(data.date),
-        createdAt: new Date()
-      });
+      console.log('Data being sent to Firestore:', reservationData);
+
+      const docRef = await addDoc(collection(db, 'reservations'), reservationData);
       console.log("Reservation saved with ID: ", docRef.id);
       navigate('/confirmation', { 
         state: { 
@@ -36,7 +36,7 @@ function Reservation() {
         } 
       });
     } catch (error) {
-      console.error("Full error object:", error); // Log the full error object
+      console.error("Full error object:", error);
       setError('Terjadi kesalahan saat menyimpan reservasi. Silakan coba lagi.');
     } finally {
       setLoading(false);
@@ -53,7 +53,7 @@ function Reservation() {
         {loading ? (
           <CircularProgress />
         ) : (
-          <ReservationForm onSubmit={handleReservation} />
+          <ReservationForm onSubmit={handleReservation} userEmail={user.email} />
         )}
       </Box>
     </Container>

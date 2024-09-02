@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TextField, Button, Box } from '@mui/material';
+import { useAuth } from '../context/AuthContext'; // Import useAuth
 
 function ReservationForm({ onSubmit }) {
+  const { user } = useAuth(); // Get the current user
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     guests: '',
     date: '',
   });
+
+  useEffect(() => {
+    // Pre-fill the email if the user is authenticated
+    if (user && user.email) {
+      setFormData(prevState => ({
+        ...prevState,
+        email: user.email
+      }));
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,6 +67,7 @@ function ReservationForm({ onSubmit }) {
         onChange={handleChange}
         margin="normal"
         required
+        disabled={!!user} // Disable if user is authenticated
       />
       <TextField
         fullWidth
