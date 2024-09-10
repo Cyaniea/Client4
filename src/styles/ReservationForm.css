@@ -1,0 +1,50 @@
+@import 'variables.css';
+
+.reservation-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--spacing-large);
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-medium);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-small);
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: var(--spacing-small);
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+}
+
+.form-group textarea {
+  height: 100px;
+}
+
+.submit-button {
+  background-color: var(--primary-main);
+  color: white;
+  font-size: 1.1em;
+  padding: var(--spacing-medium) var(--spacing-large);
+  width: 100%;
+}
+
+.submit-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.error-message {
+  color: red;
+  margin-top: var(--spacing-small);
+}

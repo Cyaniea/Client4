@@ -1,7 +1,7 @@
-// src/context/AuthContext.js
+// src/context/AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { auth } from '../firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import { auth, db } from '../firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 const AuthContext = createContext();
 
@@ -10,12 +10,25 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [userRole, setUserRole] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      setCurrentUser(user);
+      if (user) {
+        const userDoc = await getDoc(doc(db, 'users', user.uid));
+        if (userDoc.exists()) {
+          setUserRole(userDoc.data().role);
+        } else {
+          // If it's a new user, set default role
+          await setDoc(doc(db, 'users', user.uid), { role: 'user' });
+          setUserRole('user');
+        }
+      } else {
+        setUserRole(null);
+      }
       setLoading(false);
     });
 
@@ -23,7 +36,8 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = {
-    user,
+    currentUser,
+    userRole,
     loading
   };
 

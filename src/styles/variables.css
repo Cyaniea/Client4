@@ -1,0 +1,23 @@
+:root {
+    /* Colors */
+    --primary-main: #8B4513;
+    --primary-light: #A0522D;
+    --primary-dark: #6B3E11;
+    --secondary-main: #FFA07A;
+    --background-default: #FFF5E6;
+  
+    /* Typography */
+    --font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
+    --h1-font-size: 2.5rem;
+    --h1-font-weight: 500;
+    --h2-font-size: 2rem;
+    --h2-font-weight: 400;
+  
+    /* Shape */
+    --border-radius: 8px;
+  
+    /* Spacing */
+    --spacing-small: 8px;
+    --spacing-medium: 16px;
+    --spacing-large: 24px;
+  }

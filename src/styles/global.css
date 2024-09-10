@@ -1,16 +1,56 @@
-html, body, #root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+@import 'variables.css';
+
+* {
+  box-sizing: border-box;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  font-family: var(--font-family);
+  background-color: var(--background-default);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
 }
 
-#root {
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: var(--h1-font-size);
+  font-weight: var(--h1-font-weight);
+}
+
+h2 {
+  font-size: var(--h2-font-size);
+  font-weight: var(--h2-font-weight);
+}
+
+a {
+  color: var(--primary-main);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  text-transform: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  padding: var(--spacing-small) var(--spacing-medium);
+  border: none;
+  background-color: var(--primary-main);
+  color: white;
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-medium);
 }

@@ -3,14 +3,14 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'moment/locale/id';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import { collection, getDocs, addDoc } from 'firebase/firestore';
-import { db } from "../firebase/config.js";
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from "../firebase.js";
 
 moment.locale('id');
 
 const localizer = momentLocalizer(moment);
 
-function ReservationCalendar({ onSelectDate }) {
+function ReservationCalendar({ onSelectDate, selectedDate }) {
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
 
@@ -20,8 +20,15 @@ function ReservationCalendar({ onSelectDate }) {
 
   const fetchReservations = async () => {
     try {
+      const startOfMonth = moment().startOf('month').toDate();
+      const endOfMonth = moment().endOf('month').toDate();
+
       const reservationsCol = collection(db, 'reservations');
-      const reservationSnapshot = await getDocs(reservationsCol);
+      const q = query(reservationsCol, 
+        where('date', '>=', startOfMonth),
+        where('date', '<=', endOfMonth)
+      );
+      const reservationSnapshot = await getDocs(q);
       const reservationList = reservationSnapshot.docs.map(doc => ({
         start: doc.data().date.toDate(),
         end: doc.data().date.toDate(),
@@ -43,24 +50,13 @@ function ReservationCalendar({ onSelectDate }) {
     }).format(date);
   };
 
-  const handleSelectSlot = async (slotInfo) => {
+  const handleSelectSlot = (slotInfo) => {
     const isReserved = events.some(event => 
       event.start.toDateString() === slotInfo.start.toDateString()
     );
 
     if (!isReserved) {
-      if (window.confirm(`Apakah Anda yakin ingin mereservasi tanggal ${formatDate(slotInfo.start)}?`)) {
-        try {
-          await addDoc(collection(db, 'reservations'), {
-            date: slotInfo.start
-          });
-          onSelectDate(slotInfo.start);
-          fetchReservations(); // Refresh events
-        } catch (e) {
-          console.error("Error adding reservation: ", e);
-          setError("Gagal menambahkan reservasi. Silakan coba lagi.");
-        }
-      }
+      onSelectDate(slotInfo.start);
     } else {
       alert('Tanggal ini sudah direservasi.');
     }
@@ -80,6 +76,13 @@ function ReservationCalendar({ onSelectDate }) {
         style={{ height: '100%' }}
         selectable
         onSelectSlot={handleSelectSlot}
+        date={selectedDate}
+        onNavigate={(date) => {
+          // Fetch reservations for the new month when navigating
+          const startOfMonth = moment(date).startOf('month').toDate();
+          const endOfMonth = moment(date).endOf('month').toDate();
+          fetchReservations(startOfMonth, endOfMonth);
+        }}
         messages={{
           next: "Selanjutnya",
           previous: "Sebelumnya",

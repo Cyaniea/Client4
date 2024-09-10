@@ -1,0 +1,31 @@
+@import 'variables.css';
+
+.footer {
+  background-color: var(--primary-dark);
+  color: white;
+  padding: var(--spacing-large);
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  margin-bottom: var(--spacing-medium);
+}
+
+.footer-link {
+  color: var(--secondary-main);
+}
+
+.footer-link:hover {
+  color: white;
+}
+
+.copyright {
+  margin-top: var(--spacing-large);
+  font-size: 0.9em;
+}

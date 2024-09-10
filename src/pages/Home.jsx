@@ -1,15 +1,14 @@
 import React from 'react';
-import { Box, Container, Typography, Grid, Card, CardContent, CardMedia, Button, CardActionArea} from '@mui/material';
 import { Link } from 'react-router-dom';
+import '../styles/Home.css';
 
-
-// Impor gambar
+// Import images
 import heroImage from '../assets/images/images.png';
 import simpleWeddingImage from '../assets/images/Java_Topography.png';
 import classicWeddingImage from '../assets/images/Jawas.webp';
 import luxuryWeddingImage from '../assets/images/peta-jawa-tengah_ratio-16x9.jpg';
 
-// Array paket pernikahan
+// Wedding packages array
 const weddingPackages = [
   {
     title: 'Paket Sederhana',
@@ -33,78 +32,40 @@ const weddingPackages = [
 
 function Home() {
   return (
-    <Box sx={{ flexGrow: 1, padding: 3 }}>
-      <Container maxWidth="lg">
-        <Typography variant="h2" component="h1" gutterBottom align="center">
-          Selamat Datang di Wedding Reservation
-        </Typography>
-        <Typography variant="h5" align="center" color="text.secondary" paragraph>
-          Wujudkan pernikahan impian Anda bersama kami
-        </Typography>
+    <div className="home">
+      <div className="container">
+        <h1 className="home-title">Selamat Datang di Wedding Reservation</h1>
+        <p className="home-subtitle">Wujudkan pernikahan impian Anda bersama kami</p>
         
         {/* Hero Image */}
-        <Box sx={{ my: 4 }}>
-          <img 
-            src={heroImage}
-            alt="Wedding Celebration" 
-            style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
-          />
-        </Box>
+        <div className="hero-image">
+          <img src={heroImage} alt="Wedding Celebration" />
+        </div>
 
         {/* CTA Button */}
-        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
-          <Button variant="contained" color="primary" size="large" component={Link} to="/reservation">
-            Buat Reservasi Sekarang
-          </Button>
-        </Box>
+        <div className="cta-button-container">
+          <Link to="/reservation" className="cta-button">Buat Reservasi Sekarang</Link>
+        </div>
 
         {/* Wedding Packages */}
-        <Typography variant="h4" component="h2" gutterBottom align="center" sx={{ mb: 4 }}>
-          Paket Pernikahan Kami
-        </Typography>
-        <Grid container spacing={4}>
+        <h2 className="packages-title">Paket Pernikahan Kami</h2>
+        <div className="packages-grid">
           {weddingPackages.map((pkg, index) => (
-            <Grid item key={index} xs={12} sm={6} md={4}>
-              <Card 
-                sx={{ 
-                  height: '100%', 
-                  display: 'flex', 
-                  flexDirection: 'column',
-                  transition: '0.3s',
-                  '&:hover': {
-                    transform: 'scale(1.05)',
-                    boxShadow: 3,
-                  },
-                }}
-              >
-                <CardActionArea component={Link} to={`/package/${index}`}>
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={pkg.image}
-                    alt={pkg.title}
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {pkg.title}
-                    </Typography>
-                    <Typography>
-                      {pkg.description}
-                    </Typography>
-                    <Typography variant="h6" sx={{ mt: 2 }}>
-                      {pkg.price}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-                <Button size="small" color="primary" sx={{ m: 2 }}>
-                  Lihat Detail
-                </Button>
-              </Card>
-            </Grid>
+            <div key={index} className="package-card">
+              <Link to={`/package/${index}`} className="package-link">
+                <img src={pkg.image} alt={pkg.title} className="package-image" />
+                <div className="package-content">
+                  <h3 className="package-title">{pkg.title}</h3>
+                  <p className="package-description">{pkg.description}</p>
+                  <p className="package-price">{pkg.price}</p>
+                </div>
+              </Link>
+              <button className="package-detail-button">Lihat Detail</button>
+            </div>
           ))}
-        </Grid>
-      </Container>
-    </Box>
+        </div>
+      </div>
+    </div>
   );
 }
 

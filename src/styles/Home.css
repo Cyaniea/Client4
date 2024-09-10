@@ -1,5 +1,122 @@
-body {
-    background: linear-gradient(to bottom, #FFFDD0, #DEB887);
-    min-height: 100vh;
-  }
-  
+/* src/styles/Home.css */
+.home {
+  padding: var(--spacing-large) 0;
+}
+
+.home-title {
+  font-size: 2.5rem;
+  color: var(--primary-main);
+  text-align: center;
+  margin-bottom: var(--spacing-medium);
+}
+
+.home-subtitle {
+  font-size: 1.2rem;
+  color: var(--primary-dark);
+  text-align: center;
+  margin-bottom: var(--spacing-large);
+}
+
+.hero-image {
+  margin-bottom: var(--spacing-large);
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+}
+
+.cta-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--spacing-large);
+}
+
+.cta-button {
+  background-color: var(--primary-main);
+  color: white;
+  padding: var(--spacing-medium) var(--spacing-large);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.packages-title {
+  font-size: 2rem;
+  color: var(--primary-main);
+  text-align: center;
+  margin-bottom: var(--spacing-large);
+}
+
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-large);
+}
+
+.package-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.package-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.package-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.package-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.package-content {
+  padding: var(--spacing-medium);
+}
+
+.package-title {
+  font-size: 1.2rem;
+  color: var(--primary-main);
+  margin-bottom: var(--spacing-small);
+}
+
+.package-description {
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+  margin-bottom: var(--spacing-small);
+}
+
+.package-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--primary-main);
+}
+
+.package-detail-button {
+  display: block;
+  width: 100%;
+  padding: var(--spacing-small);
+  background-color: var(--secondary-main);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.package-detail-button:hover {
+  background-color: var(--primary-light);
+}

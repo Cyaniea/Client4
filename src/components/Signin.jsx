@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Add this import
 import { TextField, Button, Typography, Container, Box } from '@mui/material';
 
 function SignIn() {
@@ -10,13 +11,18 @@ function SignIn() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { setCurrentUser } = useAuth(); // Add this line
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      console.log('Attempting to sign in with:', email); // Add this log
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log('Sign in successful:', userCredential.user); // Add this log
+      setCurrentUser(userCredential.user); // Add this line
       navigate('/');
     } catch (error) {
+      console.error('Sign in error:', error); // Add this log
       setError('Failed to sign in. Please check your credentials.');
     }
   };

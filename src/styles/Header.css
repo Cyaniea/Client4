@@ -1,0 +1,35 @@
+@import 'variables.css';
+
+.header {
+  background-color: var(--primary-main);
+  padding: var(--spacing-medium);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-link {
+  color: white;
+  margin-right: var(--spacing-medium);
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.user-info {
+  color: white;
+}
+
+.sign-out-btn {
+  background-color: var(--secondary-main);
+  color: var(--primary-dark);
+}
+
+.sign-out-btn:hover {
+  background-color: var(--primary-light);
+  color: white;
+}
