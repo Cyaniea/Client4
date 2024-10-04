@@ -3,6 +3,9 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ['@mui/material', '@emotion/react', '@emotion/styled', '@mui/icons-material']
+  },
   resolve: {
     alias: {
       'date-fns': 'date-fns/esm',

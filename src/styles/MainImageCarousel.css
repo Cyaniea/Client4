@@ -1,0 +1,51 @@
+.carousel-wrapper {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  overflow: hidden;
+  position: relative;
+}
+
+.full-width-carousel {
+  width: 100%;
+}
+
+.carousel-slide {
+  height: 500px; /* Adjust this value as needed */
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Indicator styles */
+.carousel .control-dots {
+  bottom: 20px;
+}
+
+.carousel .control-dots .dot {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  width: 12px;
+  height: 12px;
+  margin: 0 8px;
+}
+
+/* Arrow styles */
+.carousel .control-arrow {
+  background: rgba(0,0,0,0.2);
+  padding: 20px;
+  transition: background 0.15s ease-in-out;
+}
+
+.carousel .control-arrow:hover {
+  background: rgba(0,0,0,0.5);
+}
+
+.carousel .control-prev.control-arrow:before {
+  border-right: 8px solid #fff;
+}
+
+.carousel .control-next.control-arrow:before {
+  border-left: 8px solid #fff;
+}

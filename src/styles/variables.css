@@ -1,10 +1,10 @@
 :root {
     /* Colors */
-    --primary-main: #8B4513;
-    --primary-light: #A0522D;
-    --primary-dark: #6B3E11;
-    --secondary-main: #FFA07A;
-    --background-default: #FFF5E6;
+    --primary-main: #798645;
+    --primary-light: #8c7474;
+    --primary-dark: #626F47;
+    --secondary-main: #F2EED7;
+    --background-default: #FEFAE0;
   
     /* Typography */
     --font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -20,4 +20,9 @@
     --spacing-small: 8px;
     --spacing-medium: 16px;
     --spacing-large: 24px;
+
+    /* Breakpoints */
+    --mobile: 480px;
+    --tablet: 768px;
+    --desktop: 1024px;
   }

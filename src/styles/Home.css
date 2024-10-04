@@ -1,6 +1,9 @@
 /* src/styles/Home.css */
 .home {
-  padding: var(--spacing-large) 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .home-title {
@@ -56,7 +59,7 @@
 
 .packages-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--spacing-large);
 }
 
@@ -110,7 +113,7 @@
   display: block;
   width: 100%;
   padding: var(--spacing-small);
-  background-color: var(--secondary-main);
+  background-color: #798645;
   color: white;
   border: none;
   cursor: pointer;
@@ -119,4 +122,32 @@
 
 .package-detail-button:hover {
   background-color: var(--primary-light);
+}
+
+/* Media Queries */
+@media (min-width: 480px) {
+  .home-title {
+    font-size: 2rem;
+  }
+
+  .packages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .home-title {
+    font-size: 2.5rem;
+  }
+
+  .packages-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 }

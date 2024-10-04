@@ -1,12 +1,11 @@
 @import 'variables.css';
 
 .reservation-form {
+  width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  padding: var(--spacing-large);
-  background-color: white;
-  border-radius: var(--border-radius);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-medium);
+  box-sizing: border-box;
 }
 
 .form-group {
@@ -48,3 +47,24 @@
   color: red;
   margin-top: var(--spacing-small);
 }
+
+@media (min-width: 768px) {
+    .reservation-form {
+      padding: var(--spacing-large);
+    }
+  
+    .form-group {
+      display: flex;
+      align-items: center;
+    }
+  
+    .form-group label {
+      width: 30%;
+      margin-right: var(--spacing-medium);
+    }
+  
+    .form-group input,
+    .form-group select {
+      width: 70%;
+    }
+  }

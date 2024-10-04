@@ -2,11 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Home.css';
 
+
+import MainImageCarousel from '../components/MainImageCarousel';
+import '../styles/Home.css';
+
 // Import images
-import heroImage from '../assets/images/images.png';
-import simpleWeddingImage from '../assets/images/Java_Topography.png';
-import classicWeddingImage from '../assets/images/Jawas.webp';
-import luxuryWeddingImage from '../assets/images/peta-jawa-tengah_ratio-16x9.jpg';
+import heroImage from '../assets/images/image1.png';
+import simpleWeddingImage from '../assets/images/p1.jpg';
+import classicWeddingImage from '../assets/images/p2.jpeg';
+import luxuryWeddingImage from '../assets/images/p3.jpg';
 
 // Wedding packages array
 const weddingPackages = [
@@ -31,16 +35,22 @@ const weddingPackages = [
 ];
 
 function Home() {
+  const rowdiesStyle = {
+    fontFamily: "'Rowdies', cursive",
+    fontWeight: 700, // Anda bisa menyesuaikan ini (300, 400, atau 700)
+    // Tambahkan properti styling lain jika diperlukan
+  };
   return (
     <div className="home">
       <div className="container">
-        <h1 className="home-title">Selamat Datang di Wedding Reservation</h1>
+        <MainImageCarousel /> 
+        <h1 className="home-title" style={rowdiesStyle}>Selamat Datang di Wedding Reservation</h1>
         <p className="home-subtitle">Wujudkan pernikahan impian Anda bersama kami</p>
         
-        {/* Hero Image */}
+        {/* Hero Image
         <div className="hero-image">
           <img src={heroImage} alt="Wedding Celebration" />
-        </div>
+        </div> */}
 
         {/* CTA Button */}
         <div className="cta-button-container">

@@ -1,4 +1,4 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';  // Remove the space after 'styles'
 
 const theme = createTheme({
   palette: {

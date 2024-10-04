@@ -3,9 +3,9 @@ import { useParams } from 'react-router-dom';
 import { Container, Typography, Card, CardMedia, CardContent, Box } from '@mui/material';
 
 // Impor gambar (sesuaikan path jika diperlukan)
-import simpleWeddingImage from '../assets/images/Java_Topography.png';
-import classicWeddingImage from '../assets/images/Jawas.webp';
-import luxuryWeddingImage from '../assets/images/peta-jawa-tengah_ratio-16x9.jpg';
+import simpleWeddingImage from '../assets/images/p1.jpg';
+import classicWeddingImage from '../assets/images/p2.jpeg';
+import luxuryWeddingImage from '../assets/images/p3.jpg';
 
 const packages = [
   {

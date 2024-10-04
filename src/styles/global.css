@@ -4,6 +4,29 @@
   box-sizing: border-box;
 }
 
+.home {
+  padding: 0;
+  width: 100%;
+}
+
+.hero-image {
+  width: 100%;
+  margin-bottom: var(--spacing-large);
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.packages-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-medium);
+  padding: 0 var(--spacing-medium);
+}
+
 body {
   font-family: var(--font-family);
   background-color: var(--background-default);
@@ -53,4 +76,29 @@ button:hover {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-medium);
+}
+
+@media (min-width: 768px) {
+  .packages-grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .packages-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
 }
