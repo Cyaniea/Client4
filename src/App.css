@@ -1,6 +1,4 @@
-/* src/styles/App.css */
 
-/* Reset beberapa gaya default */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -35,7 +33,7 @@ body {
   margin: 0;
 }
 
-/* Gaya untuk komponen umum */
+
 .container {
   width: 100%;
   padding: 0 1rem;
@@ -60,7 +58,7 @@ body {
   }
 }
 
-/* Gaya untuk Snackbar */
+
 .snackbar {
   position: fixed;
   bottom: 20px;
@@ -87,5 +85,3 @@ body {
   cursor: pointer;
   margin-left: 10px;
 }
-
-/* Anda bisa menambahkan

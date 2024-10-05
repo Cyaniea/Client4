@@ -1,4 +1,4 @@
-/* src/styles/Home.css */
+
 .home {
   width: 100%;
   max-width: 1200px;
@@ -48,6 +48,22 @@
 
 .cta-button:hover {
   background-color: var(--primary-dark);
+  color: #FEFF9F;
+}
+
+h1{
+  font-family: 'Lobster', cursive;
+}
+
+
+.home-title span {
+  font-family: 'Lobster', cursive;
+  background-color: #798645; /* Replace with your desired color */
+  color: #FEFF9F; /* Choose a color that contrasts with the background */
+  padding: 10px 20px; /* Adjust padding as needed */
+  display: inline-block; /* This makes the background wrap tightly around the text */
+  line-height: 1.4; /* Adjust as needed for multi-line titles */
+  border-radius: 10px;
 }
 
 .packages-title {
@@ -124,7 +140,6 @@
   background-color: var(--primary-light);
 }
 
-/* Media Queries */
 @media (min-width: 480px) {
   .home-title {
     font-size: 2rem;

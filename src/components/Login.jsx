@@ -1,46 +1,47 @@
-import React, { useState } from 'react';
-import { TextField, Button, Box, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Tambahkan useNavigate
+import { useAuth } from '../context/AuthContext';
+import '../styles/Header.css';
 
-function Login({ onLogin }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+function Header() {
+  const { currentUser, signOut } = useAuth();
+  const navigate = useNavigate(); // Tambahkan ini
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Di sini Anda akan menambahkan logika autentikasi yang sebenarnya
-    onLogin({ email });
-    navigate('/');
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      navigate('/'); // Arahkan ke halaman utama setelah sign out
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
-      <Typography variant="h5" component="h2" gutterBottom>
-        Login
-      </Typography>
-      <TextField
-        fullWidth
-        label="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        margin="normal"
-        required
-      />
-      <TextField
-        fullWidth
-        label="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        margin="normal"
-        required
-      />
-      <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-        Login
-      </Button>
-    </Box>
+    <header className="header">
+      <div className="container">
+        <nav className="nav">
+          <div className="nav-links">
+            <Link to="/" className="nav-link">Home</Link>
+            <Link to="/contacts" className="nav-link">Contacts</Link>
+            {currentUser && <Link to="/reservation" className="nav-link">Reservation</Link>}
+          </div>
+          <div className="auth-section">
+            {currentUser ? (
+              <>
+                <span className="user-email">{currentUser.email}</span>
+                <button onClick={handleSignOut} className="sign-out-btn">Sign Out</button>
+              </>
+            ) : (
+              <>
+                <Link to="/signin" className="nav-link">Sign In</Link>
+                <Link to="/signup" className="nav-link">Sign Up</Link>
+              </>
+            )}
+          </div>
+        </nav>
+      </div>
+    </header>
   );
 }
 
-export default Login;
+export default Header;

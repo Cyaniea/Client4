@@ -35,16 +35,13 @@ const weddingPackages = [
 ];
 
 function Home() {
-  const rowdiesStyle = {
-    fontFamily: "'Rowdies', cursive",
-    fontWeight: 700, // Anda bisa menyesuaikan ini (300, 400, atau 700)
-    // Tambahkan properti styling lain jika diperlukan
-  };
   return (
     <div className="home">
       <div className="container">
         <MainImageCarousel /> 
-        <h1 className="home-title" style={rowdiesStyle}>Selamat Datang di Wedding Reservation</h1>
+        <h1 className="home-title">
+          <span>Selamat Datang di Wedding Reservation</span>
+        </h1>
         <p className="home-subtitle">Wujudkan pernikahan impian Anda bersama kami</p>
         
         {/* Hero Image

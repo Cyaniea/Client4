@@ -6,7 +6,7 @@ function Footer() {
     <footer className="footer">
       <div className="container">
         <p className="copyright">
-          © {new Date().getFullYear()} Graha Trisila
+          © {new Date().getFullYear()} Graha Megatron
         </p>
       </div>
     </footer>

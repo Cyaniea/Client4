@@ -10,7 +10,7 @@
 }
 
 .carousel-slide {
-  height: 500px; /* Adjust this value as needed */
+  height: 500px;
 }
 
 .carousel-slide img {
@@ -19,7 +19,7 @@
   object-fit: cover;
 }
 
-/* Indicator styles */
+
 .carousel .control-dots {
   bottom: 20px;
 }
@@ -31,7 +31,7 @@
   margin: 0 8px;
 }
 
-/* Arrow styles */
+
 .carousel .control-arrow {
   background: rgba(0,0,0,0.2);
   padding: 20px;

@@ -1,10 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import '../styles/Header.css';
 
 function Header() {
   const { currentUser, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    console.log("Sign out button clicked");
+    try {
+      await signOut();
+      console.log("Sign out successful");
+      navigate('/');
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
 
   return (
     <header className="header">
@@ -19,7 +31,7 @@ function Header() {
             {currentUser ? (
               <>
                 <span className="user-email">{currentUser.email}</span>
-                <button onClick={signOut} className="sign-out-btn">Sign Out</button>
+                <button onClick={handleSignOut} className="sign-out-btn">Sign Out</button>
               </>
             ) : (
               <>

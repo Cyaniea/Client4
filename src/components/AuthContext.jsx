@@ -1,7 +1,7 @@
-// src/context/AuthContext.jsx
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { signOut as firebaseSignOut } from 'firebase/auth';
 
 const AuthContext = createContext();
 
@@ -22,7 +22,6 @@ export function AuthProvider({ children }) {
         if (userDoc.exists()) {
           setUserRole(userDoc.data().role);
         } else {
-          // If it's a new user, set default role
           await setDoc(doc(db, 'users', user.uid), { role: 'user' });
           setUserRole('user');
         }
@@ -35,10 +34,22 @@ export function AuthProvider({ children }) {
     return unsubscribe;
   }, []);
 
+  const signOut = async () => {
+    try {
+      await firebaseSignOut(auth);
+      setCurrentUser(null);
+      setUserRole(null);
+    } catch (error) {
+      console.error("Error during sign out:", error);
+      throw error;
+    }
+  };
+
   const value = {
     currentUser,
     userRole,
-    loading
+    loading,
+    signOut
   };
 
   return (
